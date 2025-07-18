@@ -5,7 +5,7 @@ const orderSchema = new mongoose.Schema({
     {
       product: {
         type: mongoose.Schema.Types.ObjectId,
-        ref: 'Producte',
+        ref: 'Product',
         required: true
       },
       quantity: {
@@ -27,19 +27,28 @@ const orderSchema = new mongoose.Schema({
     type: Date,
     default: Date.now
   },
-  sender: {
+  user: {
     type: mongoose.Schema.Types.ObjectId,
     ref: 'User',
     required: true
   },
   address: {
-    type: String,
-    required: true
+    type: String
   },
   phone: {
     type: String,
     required: true
-  }
+  },
+  status: {
+    type: String,
+    enum: ['pending', 'shipped', 'delivered', 'cancelled'],
+    default: 'pending'
+  },
+  paymentStatus: {
+    type: String,
+    enum: ["pending", "paid", "refunded"],
+    default: "pending",
+  },
 });
 
 module.exports = mongoose.model('Order', orderSchema); 

@@ -13,11 +13,14 @@ const jwt = require("jsonwebtoken");
 
 exports.signup = asyncHandler(async (req, res, next) => {
   console.log("signup ");
+  console.log(req.body)
   //1-create new user
   const newuser = await usermodel.create({
     name: req.body.name,
     slug: req.body.slug,
     email: req.body.email,
+    phone: req.body.phone,
+    address: req.body.address,
     password: req.body.password,
     passwordchangeAt: Date.now(),
   });
@@ -66,6 +69,7 @@ exports.login = asyncHandler(async (req, res, next) => {
 
 exports.protect = asyncHandler(async (req, res, next) => {
   console.log("protect ");
+  console.log(req.body)
   let token;
 
   if (

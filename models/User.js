@@ -26,6 +26,13 @@ const userSchema = new moongose.Schema(
     },
     phone: String,
     profileImage: String,
+    address: {
+      type: String,
+      required: [true, "Please add a address"],
+      trim: true,
+      minlenth: [3, "User address must be at least 3 characters"],
+      maxlength: [100, "User address must be less than 100 characters"],
+    },
     password: {
       type: String,
       required: [true, "Please add a password"],

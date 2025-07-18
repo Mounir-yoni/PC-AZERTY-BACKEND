@@ -15,11 +15,24 @@ const {
   updateProduct,
   deleteProduct,
   setCategoryIdToBody,
+  getPartsproducts,
   
 
 } = require("../services/ProductService");
 
-router.route("/").get(setCategoryIdToBody,getProducts).post(setCategoryIdToBody,newProductValidator, newProduct);
+const {protect, allowedTo} = require("../services/AuthService");
+const upload = require("../utils/multer");
+
+router.route("/")
+  .get(setCategoryIdToBody, getProducts)
+  .post(
+    setCategoryIdToBody,
+    upload.single("imagecover"),
+    newProductValidator,
+    protect,
+    allowedTo("admin", "superadmin", "manager"),
+    newProduct
+  );
 router.get('/homepage-products', async (req, res) => {
     const latest = await product.find().sort({ createdAt: -1 }).limit(4);
     const bestSelling = await product.find().sort({ sold: -1 }).limit(4);
@@ -27,10 +40,11 @@ router.get('/homepage-products', async (req, res) => {
     
     res.json({ latest, bestSelling, discounted });
   });
+  router.get('/parts-products', getPartsproducts);
 router
   .route("/:id")
   .get(getProductvalidator, getProduct)
-  .put(updateProductvalidator, updateProduct)
-  .delete(deleteProductvalidator, deleteProduct);
+  .put(updateProductvalidator,protect,allowedTo("admin", "superadmin", "manager"), updateProduct)
+  .delete(deleteProductvalidator,protect,allowedTo("admin", "superadmin", "manager"), deleteProduct);
 
 module.exports = router;

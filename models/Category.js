@@ -13,9 +13,9 @@ const categorySchema = new mongoose.Schema(
       type: String,
       lowercase: true,
     },
-    image: {
-      type: String,
-      required: false,
+    active: {
+      type: Boolean,
+      default: true,
     },
   },
   { timestamps: true }

@@ -22,7 +22,5 @@ exports.createOrderValidator = [
   body('phone')
     .notEmpty()
     .withMessage('Phone is required'),
-  body('sender')
-    .notEmpty()
-    .withMessage('Sender is required'),
+  
 ]; 

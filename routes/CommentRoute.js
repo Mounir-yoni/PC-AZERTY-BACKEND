@@ -10,7 +10,7 @@ const {
   deleteComment,
   getcommentbyproduct
 } = require('../services/CommentService');
-const { protect } = require('../services/AuthService');
+const { protect,allowedTo } = require('../services/AuthService');
 
 router
   .route('/')
@@ -21,7 +21,7 @@ router
   .route('/:id')
   .get(getComment)
   .put(createCommentValidator, protect ,updateComment)
-  .delete(protect,deleteComment);
+  .delete(protect,allowedTo('admin','superadmin','manager'),deleteComment);
 
 router.route('/product/:id').get(getcommentbyproduct);
 module.exports = router;

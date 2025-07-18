@@ -10,7 +10,7 @@ const {
   resetPasswordValidator,
 } = require("../utils/validators/UserValidator");
 
-const { protect } = require("../services/AuthService");
+const { protect,allowedTo } = require("../services/AuthService");
 
 const {
   getusers,
@@ -25,15 +25,15 @@ const {
   disactivateuser
 } = require("../services/UserService");
 
-router.route("/").get(getusers).post(newUserValidator, newuser);
+router.route("/").get(getusers).post(protect,allowedTo('admin','superadmin','manager'),newUserValidator, newuser);
 router.route("/getme").get(protect, getuserloggeddata, getuser);
 router.route("/changemypassword").put(protect,updateuserPassword );
 router.route("/updateme").put(protect, updateuserme);
 router.route("/deactivate").put(protect, disactivateuser);
 router
   .route("/:id")
-  .get(getUservalidator, getuser)
-  .put(updateUservalidator, updateuser)
-  .delete(deleteUservalidator, deleteuser);
+  .get(getUservalidator,protect,allowedTo('admin','superadmin','manager'),getuser)
+  .put(updateUservalidator,protect,allowedTo('admin','superadmin','manager'), updateuser)
+  .delete(deleteUservalidator,protect,allowedTo('admin','superadmin','manager'), deleteuser);
 router.route("/updatePassword/:id").put(resetPasswordValidator, updatePassword);
 module.exports = router;

@@ -42,12 +42,10 @@ const newProductValidator = [
       }
       return true;
     }),
-  check("color").notEmpty().withMessage("Please add a color"),
   check("images")
     .optional()
     .isArray()
     .withMessage("Product images must be an array"),
-  check("imagecover").notEmpty().withMessage("Please add a image"),
   check("category")
     .isMongoId()
     .withMessage("Invalid category id")
@@ -58,7 +56,6 @@ const newProductValidator = [
       }
     }),
   
-  check("brand").isMongoId().withMessage("Invalid brand id"),
   check("ratingsAverage")
     .optional()
     .isNumeric()

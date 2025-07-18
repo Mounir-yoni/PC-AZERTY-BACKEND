@@ -33,7 +33,7 @@ router
 router
   .route("/:id")
   .get(getCategoriesvalidator, getCategory)
-  .put(updateCategoryvalidator, updateCategory)
-  .delete(deleteCategoryvalidator, deleteCategory);
+  .put(Authunticate.protect,Authunticate.allowedTo("admin","manager","superadmin"),updateCategoryvalidator, updateCategory)
+  .delete(Authunticate.protect,Authunticate.allowedTo("admin","manager","superadmin"),deleteCategoryvalidator, deleteCategory);
 
 module.exports = router;

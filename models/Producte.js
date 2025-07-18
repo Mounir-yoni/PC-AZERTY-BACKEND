@@ -72,6 +72,15 @@ const productSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    Partname: {
+      type: String,
+      enum: ["Package", "CPU", "gpu", "motherboard", "ram", "storage", "psu", "cooling", "case"],
+      required: true,
+    },
+    active: {
+      type: Boolean,
+      default: true,
+    },
   },
   { timestamps: true }
 );
