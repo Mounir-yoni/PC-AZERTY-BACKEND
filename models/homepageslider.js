@@ -11,7 +11,7 @@ const homepageslider = new mongoose.Schema({
     description: {
         type: String,
         required: [true, "Please add a description"],
-        minlength: [20, "Description must be at least 20 characters"],
+        minlength: [2, "Description must be at least 20 characters"],
         maxlength: [5000, "Description must be less than 5000 characters"]
     },
     image: {

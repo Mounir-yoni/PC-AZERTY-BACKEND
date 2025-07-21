@@ -12,7 +12,7 @@ const newSliderValidator = [
   check("description")
     .notEmpty()
     .withMessage("Please add a description")
-    .isLength({ min: 20 })
+    .isLength({ min: 2 })
     .withMessage("Description must be at least 20 characters")
     .isLength({ max: 5000 })
     .withMessage("Description must be less than 5000 characters"),
