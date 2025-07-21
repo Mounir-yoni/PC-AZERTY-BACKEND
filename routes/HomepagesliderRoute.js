@@ -20,10 +20,9 @@ router
   .route('/')
   .get(getSliders)
   .post(
+    upload.single('image'),
     protect,
     allowedTo('admin', 'superadmin', 'manager'),
-    upload.single('image'),
-    newSliderValidator,
     createSlider
   );
 

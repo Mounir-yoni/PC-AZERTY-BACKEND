@@ -4,14 +4,18 @@ const ApiError = require('../utils/apierror');
 
 // Create new slider
 exports.createSlider = asyncHandler(async (req, res, next) => {
-  let imageUrl = req.body.image;
-  if (req.file && req.file.path) {
-    imageUrl = req.file.path;
+  console.log('Creating slider with data:', req.body);
+  console.log(req.file)
+//  let imageUrl = req.body.image;
+  if (req.file) {
+    req.body.image = req.file.filename; // أو req.file.path حسب ما تريد
+    const cloudName = process.env.CLOUDINARY_CLOUD_NAME;
+    req.body.image = `https://res.cloudinary.com/${cloudName}/image/upload/${req.body.image}`;
   }
   const slider = await Homepageslider.create({
     title: req.body.title,
     description: req.body.description,
-    image: imageUrl,
+    image: req.body.image, // استخدام الصورة التي تم تحميلها
   });
   res.status(201).json({ status: 'success', data: slider });
 });
