@@ -17,8 +17,8 @@ const newProductValidator = [
     .withMessage("Please add a description")
     .isLength({ min: 20 })
     .withMessage("Product description must be at least 20 characters")
-    .isLength({ max: 500 })
-    .withMessage("Product description must be less than 500 characters"),
+    .isLength({ max: 5000 })
+    .withMessage("Product description must be less than 5000 characters"),
   check("quantity")
     .notEmpty()
     .withMessage("Please add a quantity")
