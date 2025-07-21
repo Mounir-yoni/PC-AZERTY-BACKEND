@@ -15,6 +15,7 @@ const signuproute = require("./routes/AuthRoute");
 const OrderRoute = require("./routes/OrderRoute");
 const CommentRoute = require("./routes/CommentRoute");
 const AdminRoute = require("./routes/AdminRoute");
+const homepagesliderRoute = require('./routes/HomepagesliderRoute');
 /* connect to database */
 connectdatabase();
 
@@ -41,6 +42,7 @@ app.use("/api/v1/Auth", signuproute);
 app.use("/api/v1/orders", OrderRoute);
 app.use("/api/v1/comments", CommentRoute);
 app.use("/api/v1/admin", AdminRoute);
+app.use('/api/v1/homepageslider', homepagesliderRoute);
 app.all("*", (req, res, next) => {
   next(new ApiError(`could not find ${req.originalUrl} on this server`, 404));
 });

@@ -18,7 +18,7 @@ const productSchema = new mongoose.Schema(
     description: {
       type: String,
       required: [true, "Please add a description"],
-      minlenth: [20, "Product description must be at least 20 characters"],
+      minlenth: [1, "Product description must be at least 1 characters"],
       maxlength: [5000, "Product description must be less than 5000 characters"],
     },
     quantity: {
