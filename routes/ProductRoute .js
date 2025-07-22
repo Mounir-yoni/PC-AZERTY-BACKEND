@@ -34,9 +34,9 @@ router.route("/")
     newProduct
   );
 router.get('/homepage-products', async (req, res) => {
-    const latest = await product.find().sort({ createdAt: -1 }).limit(4);
-    const bestSelling = await product.find().sort({ sold: -1 }).limit(4);
-    const discounted = await product.find().sort({priceAfterDiscount:1}).limit(4);
+    const latest = await product.find({active:true}).sort({ createdAt: -1 }).limit(4);
+    const bestSelling = await product.find({active:true}).sort({ sold: -1 }).limit(4);
+    const discounted = await product.find({active:true}).sort({priceAfterDiscount:1}).limit(4);
     
     res.json({ latest, bestSelling, discounted });
   });

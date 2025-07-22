@@ -1,6 +1,6 @@
 const express = require("express");
 const { protect, allowedTo } = require("../services/AuthService");
-const { OrderStatistics, MonthlyStatistics, getLastFourOrders, getOrdersPerDayLast7Days,getTopProducts,getlastgategory, getLastFiveUsers, getOrdersPerDayLast15Days } = require("../services/AdminService");
+const { OrderStatistics, MonthlyStatistics, getLastFourOrders, getOrdersPerDayLast7Days,getTopProducts,getlastgategory, getLastFiveUsers, getOrdersPerDayLast15Days,getallcategory,getallproducts } = require("../services/AdminService");
 
 const router = express.Router();
 
@@ -13,5 +13,6 @@ router.get("/top-products", protect, allowedTo("admin", "superadmin", "manager")
 router.get("/last-gategory", protect, allowedTo("admin", "superadmin", "manager"), getlastgategory);
 router.get("/last-users", protect, allowedTo("admin", "superadmin", "manager"), getLastFiveUsers);
 router.get("/orders-per-day-last-15-days", protect, allowedTo("admin", "superadmin", "manager"), getOrdersPerDayLast15Days);
-
+router.get("/all-category", protect, allowedTo("admin", "superadmin", "manager"), getallcategory);
+router.get("/all-products", protect, allowedTo("admin", "superadmin", "manager"), getallproducts);
 module.exports = router;

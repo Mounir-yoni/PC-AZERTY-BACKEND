@@ -231,3 +231,26 @@ exports.getOrdersPerDayLast15Days = asyncHandler(async (req, res, next) => {
     data: result
   });
 });
+
+
+exports.getallproducts = asyncHandler(async (req, res, next) => {
+  const products = await Product.find()
+    .sort({ createdAt: -1 })
+    .populate('category', 'name'); // Assuming Product has a 'category' field
+
+  res.status(200).json({
+    status: 'success',
+    data: products
+  });
+});
+
+exports.getallcategory= asyncHandler(async (req, res, next) => {
+  const Category = require('../models/Category');
+  const categories = await Category.find()
+    .sort({ createdAt: -1 });
+
+  res.status(200).json({
+    status: 'success',
+    data: categories
+  });
+});

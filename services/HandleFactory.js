@@ -20,6 +20,7 @@ const deleteOne = (model) =>
 ;
 
 const updateOne = (model) =>asyncHandler(async (req, res, next) => {
+  console.log(req.body);
   const document = await model.findByIdAndUpdate(req.params.id, req.body, {
     new: true,
   });
