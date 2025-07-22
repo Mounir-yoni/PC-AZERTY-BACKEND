@@ -78,12 +78,10 @@ const getAll = (model, modelname="") => asyncHandler(async (req, res) => {
     
   }
   if (req.params.CategoryId) filterob = { category: req.params.CategoryId };
-  const countDocument = await model.countDocuments();
   const document = new APIFeatures(model.find(filterob), req.query)
     .filter()
     .sort()
     .limitFields()
-    .pagination(countDocument)
     .serching(modelname);
 
   const { paginationResult, Mongoosequery } = document;
